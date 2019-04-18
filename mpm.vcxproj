@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="debug|x64">
+      <Configuration>debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="release|x64">
+      <Configuration>release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{34DE947C-39C6-464F-AB4C-52C7DCDE42FD}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>mpm</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 9.1.props" />
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)\build\$(Configuration)\</OutDir>
+    <IntDir>build\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)\build\$(Configuration)\</OutDir>
+    <IntDir>build\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>GLM_FORCE_CUDA;GLM_FORCE_PURE;__TBB_NO_IMPLICIT_LINKAGE;NOMINMAX;_USE_MATH_DEFINES;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>include\;$(GLEW_PATH)\include\;$(GLM_PATH)\include\;$(GLFW_PATH)\include\;$(BOOST_PATH)\;$(TBB_PATH)\include\;$(ILMBASE_PATH)\include\;$(OPENVDB_PATH)\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(GLEW_PATH)\lib\;$(GLFW_PATH)\lib\;$(BLOSC_PATH)\lib\;$(TBB_PATH)\lib\;$(ILMBASE_PATH)\lib\;$(OPENVDB_PATH)\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cudart.lib;opengl32.lib;glu32.lib;glew32.lib;glfw3.lib;blosc.lib;tbb.lib;half.lib;openvdb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)" /y
+xcopy "$(GLEW_PATH)\bin\glew32.dll" "$(OutDir)" /y
+xcopy "$(GLFW_PATH)\bin\glfw3.dll" "$(OutDir)" /y
+xcopy "$(TBB_PATH)\bin\tbb.dll" "$(OutDir)" /y
+xcopy "$(ILMBASE_PATH)\bin\half.dll" "$(OutDir)" /y
+xcopy "$(OPENVDB_PATH)\bin\openvdb.dll" "$(OutDir)" /y
+xcopy "$(BLOSC_PATH)\bin\blosc.dll" "$(OutDir)" /y
+xcopy "$(LZ4_PATH)\bin\lz4.dll" "$(OutDir)" /y
+xcopy "$(ZLIB_PATH)\bin\zlib1.dll" "$(OutDir)" /y
+xcopy "$(ZSTD_PATH)\bin\zstd.dll" "$(OutDir)" /y
+xcopy "$(SNAPPY_PATH)\bin\snappy.dll" "$(OutDir)" /y
+xcopy "$(ProjectDir)\res" "$(OutDir)\res" /y /s /i</Command>
+    </PostBuildEvent>
+    <CudaCompile>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
+    </CudaCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>GLM_FORCE_CUDA;GLM_FORCE_PURE;__TBB_NO_IMPLICIT_LINKAGE;NOMINMAX;_USE_MATH_DEFINES;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>include\;$(GLEW_PATH)\include\;$(GLM_PATH)\include\;$(GLFW_PATH)\include\;$(BOOST_PATH)\;$(TBB_PATH)\include\;$(ILMBASE_PATH)\include\;$(OPENVDB_PATH)\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(GLEW_PATH)\lib\;$(GLFW_PATH)\lib\;$(BLOSC_PATH)\lib\;$(TBB_PATH)\lib\;$(ILMBASE_PATH)\lib\;$(OPENVDB_PATH)\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cudart.lib;opengl32.lib;glu32.lib;glew32.lib;glfw3.lib;blosc.lib;tbb.lib;half.lib;openvdb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)" /y
+xcopy "$(GLEW_PATH)\bin\glew32.dll" "$(OutDir)" /y
+xcopy "$(GLFW_PATH)\bin\glfw3.dll" "$(OutDir)" /y
+xcopy "$(TBB_PATH)\bin\tbb.dll" "$(OutDir)" /y
+xcopy "$(ILMBASE_PATH)\bin\half.dll" "$(OutDir)" /y
+xcopy "$(OPENVDB_PATH)\bin\openvdb.dll" "$(OutDir)" /y
+xcopy "$(BLOSC_PATH)\bin\blosc.dll" "$(OutDir)" /y
+xcopy "$(LZ4_PATH)\bin\lz4.dll" "$(OutDir)" /y
+xcopy "$(ZLIB_PATH)\bin\zlib1.dll" "$(OutDir)" /y
+xcopy "$(ZSTD_PATH)\bin\zstd.dll" "$(OutDir)" /y
+xcopy "$(SNAPPY_PATH)\bin\snappy.dll" "$(OutDir)" /y
+xcopy "$(ProjectDir)\res" "$(OutDir)\res" /y /s /i</Command>
+    </PostBuildEvent>
+    <CudaCompile>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
+    </CudaCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MeshToParticle.cpp" />
+    <ClCompile Include="src\TriangleMesh.cpp" />
+    <ClCompile Include="src\Viewer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\mpm\Camera.h" />
+    <ClInclude Include="include\mpm\Global.h" />
+    <ClInclude Include="include\mpm\MeshToParticle.h" />
+    <ClInclude Include="include\mpm\MPM.h" />
+    <ClInclude Include="include\mpm\TriangleMesh.h" />
+    <ClInclude Include="include\mpm\Viewer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include="LICENSE">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='release|x64'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
+      </ExcludedFromBuild>
+    </None>
+    <None Include="README.md" />
+    <None Include="res\shaders\axes.frag" />
+    <None Include="res\shaders\axes.vert" />
+    <None Include="res\shaders\grid.frag" />
+    <None Include="res\shaders\grid.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\meshes\bunny.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='release|x64'">
+      </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
+      </ExcludedFromBuild>
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 9.1.targets" />
+  </ImportGroup>
+</Project>

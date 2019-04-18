@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{95cf6d41-11e9-4627-b499-dc2391fd13e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shader Files">
+      <UniqueIdentifier>{2ca8efbc-3c05-4f19-9b8c-200a1cb6e5b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Mesh Files">
+      <UniqueIdentifier>{f0524ba0-a64f-4b68-9bd4-e3d0407242b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Other Files">
+      <UniqueIdentifier>{0393479d-0218-47da-9170-d2d47991da54}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Viewer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MeshToParticle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TriangleMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\mpm\Global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mpm\MPM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mpm\Viewer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mpm\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mpm\MeshToParticle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mpm\TriangleMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shaders\grid.frag">
+      <Filter>Resource Files\Shader Files</Filter>
+    </None>
+    <None Include="res\shaders\grid.vert">
+      <Filter>Resource Files\Shader Files</Filter>
+    </None>
+    <None Include="res\shaders\axes.vert">
+      <Filter>Resource Files\Shader Files</Filter>
+    </None>
+    <None Include="res\shaders\axes.frag">
+      <Filter>Resource Files\Shader Files</Filter>
+    </None>
+    <None Include="LICENSE">
+      <Filter>Other Files</Filter>
+    </None>
+    <None Include="README.md">
+      <Filter>Other Files</Filter>
+    </None>
+    <None Include=".gitignore">
+      <Filter>Other Files</Filter>
+    </None>
+    <None Include="res\meshes\bunny.obj">
+      <Filter>Resource Files\Mesh Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>
